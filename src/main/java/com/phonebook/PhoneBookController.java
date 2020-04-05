@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 /**
  * The Controller class for exposing the API Endpoints
@@ -47,5 +48,10 @@ public class PhoneBookController {
 	public String updateEntry(@RequestBody PhoneBookEntry phoneBookEntry) {
 		repository.save(phoneBookEntry);
 		return "Entry updated.";
+	}
+	
+	@GetMapping("/searchBySurName")
+	public List<PhoneBookEntry> searchBySurName(@RequestParam String surName){
+		return (List<PhoneBookEntry>) repository.findBySurName(surName);
 	}
 }
